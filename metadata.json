@@ -1,6 +1,6 @@
 {
   "name": "icann-tinyprocy",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "john.bond@icann.org",
   "summary": "puppet module to manage NSD",
   "license": "Apache-2.0",
@@ -11,6 +11,10 @@
     {
       "name": "puppetlabs-stdlib",
       "version_requirement": ">= 4.17.0 <9.0.0"
+    },
+    {
+      "name": "puppet-systemd",
+      "version_requirement": ">= 8.0.0 <9.0.0"
     }
   ],
   "operatingsystem_support": [
