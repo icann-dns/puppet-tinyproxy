@@ -27,7 +27,7 @@ class tinyproxy (
   Integer[1]                 $max_spare_servers  = 20,
   Integer[1]                 $start_servers      = 10,
   Boolean                    $syslog             = true,
-  Icannlib::Syslog::Level    $log_level          = 'warning',
+  Tinyproxy::Syslog_level    $log_level          = 'warning',
   Stdlib::Unixpath           $default_error_file = '/usr/share/tinyproxy/default.html',
   Stdlib::Unixpath           $stat_file          = '/usr/share/tinyproxy/stats.html',
   Stdlib::Unixpath           $pid_file           = '/run/tinyproxy/tinyproxy.pid',
