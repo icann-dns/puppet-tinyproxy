@@ -1,0 +1,34 @@
+{
+  "name": "icann-tinyprocy",
+  "version": "0.0.1",
+  "author": "john.bond@icann.org",
+  "summary": "puppet module to manage NSD",
+  "license": "Apache-2.0",
+  "source": "https://github.com/icann-dns/puppet-tinyprocy",
+  "project_page": "https://github.com/icann-dns/puppet-tinyprocy",
+  "issues_url": "https://github.com/icann-dns/puppet-tinyprocy/issues",
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 4.17.0 <9.0.0"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "22.04"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 4.7.0 < 9.0.0"
+    }
+  ],
+  "tags": [
+    "tinyprocy",
+    "network"
+  ]
+}
