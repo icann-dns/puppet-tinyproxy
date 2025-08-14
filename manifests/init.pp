@@ -51,10 +51,10 @@ class tinyproxy (
     MaxSpareServers ${max_spare_servers}
     StartServers ${start_servers}
     Syslog ${syslog.bool2str('On', 'Off')}
-    LogLevel ${log_level.capitalize()},
-    DefaultErrorFile ${default_error_file}
-    PidFile ${pid_file}
-    StatFile ${stat_file}
+    LogLevel ${log_level.capitalize()}
+    DefaultErrorFile "${default_error_file}"
+    PidFile "${pid_file}"
+    StatFile "${stat_file}"
     ${connect_ports_lines}
     ${allowed_lines}
     ${blocked_lines}
@@ -62,10 +62,23 @@ class tinyproxy (
 
   $defaults_config = @("CONFIG"/$)
     CONFIG="${config_file}"
-    FLAGS="-c \$CONFIG"
+    FLAGS="-c\$CONFIG"
     | CONFIG
 
   stdlib::ensure_packages(['tinyproxy'])
+
+  # BUG: the current environment file does not work see following debian BUG
+  # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=996739
+  systemd::manage_dropin { 'execstart.conf':
+    unit           => 'tinyproxy.service',
+    notify_service => true,
+    service_entry  => {
+      'ExecStart' => ['', "/usr/bin/tinyproxy -d -c ${config_file}"],
+      'Type'      => 'simple',
+    },
+    require        => Package['tinyproxy'],
+  }
+
   # Define the class resources
   file {
     default:
@@ -75,8 +88,9 @@ class tinyproxy (
       notify => Service['tinyproxy'];
     $config_file:
       content => $config;
-    '/etc/default/tinyproxy':
-      content => $defaults_config;
+    # see bug above
+    #'/etc/default/tinyproxy':
+    #  content => $defaults_config;
   }
 
   service { 'tinyproxy':
